@@ -14,7 +14,7 @@
 	<name>Java-Upskilling</name>
 	<description>Demo project for deploying a java app through terraform to AWS</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>18</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
