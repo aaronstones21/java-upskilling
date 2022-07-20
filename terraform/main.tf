@@ -7,16 +7,26 @@ provider "aws" {
 resource "aws_s3_bucket" "s3_bucket_myapp" {
   bucket = "myapp-prod-remastered-baby"
   acl = "private"
+  server_side_encryption_configuration {
+    
+  }
+  logging {
+    
+  }
+  versioning {
+    enabled= true
+    mfa_delete = true
+  }
 }
 
 resource "aws_s3_bucket_object" "s3_bucket_object_myapp" {
   bucket = aws_s3_bucket.s3_bucket_myapp.id
   key = "beanstalk/myapp"
-  source = "target/upskilling-0.0.1-SNAPSHOT.jar"
+  source = "../target/upskilling-0.0.1-SNAPSHOT.jar"
 }
 
 resource "aws_elastic_beanstalk_application" "beanstalk_myapp" {
-  name = "myapp-4"
+  name = "myapp"
   description = "The description of my application"
 }
 
@@ -28,7 +38,7 @@ resource "aws_elastic_beanstalk_application_version" "beanstalk_myapp_version" {
 }
 
 resource "aws_elastic_beanstalk_environment" "beanstalk_myapp_env" {
-  name = "myapp-prod-4"
+  name = "myapp-prod"
   application = aws_elastic_beanstalk_application.beanstalk_myapp.name
   solution_stack_name = "64bit Amazon Linux 2 v3.2.16 running Corretto 11"
   version_label = aws_elastic_beanstalk_application_version.beanstalk_myapp_version.name
