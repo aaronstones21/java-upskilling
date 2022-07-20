@@ -38,4 +38,5 @@ jobs:
         run: mvn test 
 
       - name: Snyk
+        run: snyk auth ${{ secrets.SNYK_KEY }}
         uses: snyk/actions@0.3.0
