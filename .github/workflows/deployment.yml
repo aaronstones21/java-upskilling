@@ -25,6 +25,9 @@ jobs:
     - name: Terraform destroy
       run: ( cd terraform ; terraform destroy -auto-approve -var 'AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY }}' -var 'AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_KEY }}')
 
+    - name: Maven package
+      run: mvn package
+
     - name: Terraform apply
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
