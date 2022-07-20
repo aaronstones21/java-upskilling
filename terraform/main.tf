@@ -16,7 +16,7 @@ resource "aws_s3_bucket_object" "s3_bucket_object_myapp" {
 }
 
 resource "aws_elastic_beanstalk_application" "beanstalk_myapp" {
-  name = "myapp-3"
+  name = "myapp-4"
   description = "The description of my application"
 }
 
@@ -28,7 +28,7 @@ resource "aws_elastic_beanstalk_application_version" "beanstalk_myapp_version" {
 }
 
 resource "aws_elastic_beanstalk_environment" "beanstalk_myapp_env" {
-  name = "myapp-prod-3"
+  name = "myapp-prod-4"
   application = aws_elastic_beanstalk_application.beanstalk_myapp.name
   solution_stack_name = "64bit Amazon Linux 2 v3.2.16 running Corretto 11"
   version_label = aws_elastic_beanstalk_application_version.beanstalk_myapp_version.name
