@@ -1,32 +1,37 @@
-name: Java CI
-
+name: Terraform Apply
 on: 
-  pull_request:
+  push:
     branches: 
       - main
-      - dev 
-      - 'releases/**'
 
 jobs:
-  build:
+  terraform_apply:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 18
-        uses: actions/setup-java@v3
-        with:
-          java-version: '18'
-          distribution: 'adopt'
+    - uses: actions/checkout@v1
 
+    - name: Install Terraform
+      env:
+            TERRAFORM_VERSION: "0.12.15"
+      run: |
+        tf_version=$TERRAFORM_VERSION
+        wget https://releases.hashicorp.com/terraform/"$tf_version"/terraform_"$tf_version"_linux_amd64.zip
+        unzip terraform_"$tf_version"_linux_amd64.zip
+        sudo mv terraform /usr/local/bin/
+        - name: Verify Terraform version
+      run: terraform --version
 
-      - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots package
+    - name: Terraform init
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: ( cd terraform ; terraform init -input=false )
 
+    - name: Terraform validation
+      run: ( cd terraform ; terraform validate )
 
-      - name: Install the Application
-        run: mvn clean install 
-
-
-      - name: Run unit tests
-        run: mvn test 
+    - name: Terraform apply
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: ( cd terraform ; terraform apply -auto-approve -input=false )
