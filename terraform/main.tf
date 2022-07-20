@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "s3_bucket_myapp" {
 resource "aws_s3_bucket_object" "s3_bucket_object_myapp" {
   bucket = aws_s3_bucket.s3_bucket_myapp.id
   key = "beanstalk/myapp"
-  source = "./target/upskilling-0.0.1-SNAPSHOT.jar"
+  source = "target/upskilling-0.0.1-SNAPSHOT.jar"
 }
 
 resource "aws_elastic_beanstalk_application" "beanstalk_myapp" {
