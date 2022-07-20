@@ -37,5 +37,7 @@ jobs:
       - name: Run unit tests
         run: mvn test 
 
-      - name: Snyk
-        run: snyk auth ${{ secrets.SNYK_KEY }}
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/maven@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_KEY }}
