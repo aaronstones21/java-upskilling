@@ -30,3 +30,6 @@ jobs:
 
       - name: Run unit tests
         run: mvn test 
+
+      - name: Snyk
+        uses: snyk/actions@0.3.0
