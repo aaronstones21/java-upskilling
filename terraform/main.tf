@@ -4,25 +4,31 @@ provider "aws" {
   secret_key = var.AWS_SECRET_ACCESS_KEY
 }
 
+resource "aws_kms_key" "mykey" {
+  description             = "This key is used to encrypt bucket objects"
+  deletion_window_in_days = 10
+}
+
 resource "aws_s3_bucket" "s3_bucket_myapp" {
   bucket = "myapp-prod-remastered-baby"
   acl = "private"
-  server_side_encryption_configuration {
-    
-  }
-  logging {
-    
-  }
-  versioning {
-    enabled= true
-    mfa_delete = true
-  }
 }
 
 resource "aws_s3_bucket_object" "s3_bucket_object_myapp" {
   bucket = aws_s3_bucket.s3_bucket_myapp.id
   key = "beanstalk/myapp"
   source = "../target/upskilling-0.0.1-SNAPSHOT.jar"
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
+  bucket = "myapp-prod-remastered-baby"
+
+  rule {
+    apply_server_side_encryption_by_default {
+      kms_master_key_id = aws_kms_key.mykey.arn
+      sse_algorithm     = "aws:kms"
+    }
+  }
 }
 
 resource "aws_elastic_beanstalk_application" "beanstalk_myapp" {
