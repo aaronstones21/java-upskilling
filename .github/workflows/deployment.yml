@@ -1,10 +1,9 @@
-name: Java CI
+name: Java CD
 
 on: 
   push:
     branches: 
       - main
-      - 'releases/**'
 
 jobs:
   build:
