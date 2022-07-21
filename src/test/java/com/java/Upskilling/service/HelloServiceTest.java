@@ -17,6 +17,6 @@ public class HelloServiceTest {
         final HelloModel result = service.get("42");
 
         assertEquals(result.getAge(), "42");
-        assertEquals(result.getName(), "Aaron Stones");
+        assertEquals(result.getName(), "Jenna Stones");
     }
 }
