@@ -1,11 +1,11 @@
-resource "aws_elastic_beanstalk_environment" "aws-ebs-env-java-project" {
+resource "aws_elastic_beanstalk_environment" "ebs-env" {
 
-  depends_on = [aws_elastic_beanstalk_application_version.aws-aws-ebs-app-java-project-java-project-ver]
-  name = "java-upskilling-app"
-  application = "${aws_elastic_beanstalk_application.aws-ebs-app-java-project.name}"
+  depends_on = [aws_elastic_beanstalk_application_version.ebs-app-ver]
+  name = "my-sample-application-dev"
+  application = "${aws_elastic_beanstalk_application.ebs-app.name}"
   solution_stack_name = "64bit Amazon Linux 2 v3.2.16 running Corretto 11"
-  cname_prefix = "java-upskilling-app"
-  version_label = "${aws_elastic_beanstalk_application_version.aws-aws-ebs-app-java-project-java-project-ver.name}"
+  cname_prefix = "my-sample-application-dev"
+  version_label = "${aws_elastic_beanstalk_application_version.ebs-app-ver.name}"
 
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"

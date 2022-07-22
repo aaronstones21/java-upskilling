@@ -17,7 +17,7 @@ public class HelloRepoTest {
         HelloModel expected = new HelloModel();
 
         expected.setAge("42");
-        expected.setName("Aaron Stones");
+        expected.setName("Jenna Stones");
 
         assertEquals(expected.getAge(), result.getAge());
         assertEquals(expected.getName(), result.getName());

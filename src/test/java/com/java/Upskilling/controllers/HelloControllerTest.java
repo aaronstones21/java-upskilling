@@ -14,7 +14,7 @@ public class HelloControllerTest {
     public void getTest() {
         HelloModel model = helloController.find("42");
 
-        assertEquals("Aaron Stones", model.getName());
+        assertEquals("Jenna Stones", model.getName());
         assertEquals("42", model.getAge());
     }
 }
