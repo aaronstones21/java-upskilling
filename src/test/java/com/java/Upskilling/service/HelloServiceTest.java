@@ -1,22 +1,39 @@
 package com.java.Upskilling.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.java.Upskilling.models.HelloModel;
+import com.java.Upskilling.repositories.HelloRepository;
 import com.java.Upskilling.services.HelloService;
 
+@SpringBootTest
 public class HelloServiceTest {
 
-    private final HelloService service = new HelloService();
+    @Mock
+    private HelloRepository helloRepository;
 
-    @Test
-    public void get() {
+    @InjectMocks
+    private HelloService helloService = new HelloService();
 
-        final HelloModel result = service.get("42");
+    private HelloModel helloModel = new HelloModel();
 
-        assertEquals(result.getAge(), "42");
-        assertEquals(result.getName(), "Jenna Stones");
+    @BeforeEach
+    void setMockOutput() {
+        when(helloRepository.get("42")).thenReturn(helloModel);
     }
+
+    @DisplayName("Test Mock helloService + helloRepository")
+    @Test
+    void testGet() {
+        assertEquals(helloModel, helloService.get("42"));
+    }
+
 }

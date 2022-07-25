@@ -13,10 +13,11 @@ import com.java.Upskilling.services.HelloService;
 @RestController()
 public class HelloController {
 
-    @GetMapping("/hello/{id}")
-    public HelloModel find(@PathVariable(value = "id") String id) {
+    private HelloService helloService = new HelloService();
 
-        HelloService helloService = new HelloService();
+    @GetMapping("/hello/{id}")
+    public HelloModel get(@PathVariable(value = "id") String id) {
+
         return helloService.get(id);
     }
 

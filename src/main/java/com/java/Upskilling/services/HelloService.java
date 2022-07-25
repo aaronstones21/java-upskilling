@@ -7,8 +7,10 @@ import com.java.Upskilling.repositories.HelloRepository;
 
 @Service
 public class HelloService {
+
+    private HelloRepository helloRepository = new HelloRepository();
+
     public HelloModel get(String id) {
-        HelloRepository helloRepository = new HelloRepository();
         return helloRepository.get(id);
     }
 }

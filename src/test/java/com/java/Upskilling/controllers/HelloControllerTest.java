@@ -1,20 +1,33 @@
 package com.java.Upskilling.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.java.Upskilling.models.HelloModel;
+import com.java.Upskilling.services.HelloService;
 
+@SpringBootTest
 public class HelloControllerTest {
 
-    private final HelloController helloController = new HelloController();
+    @InjectMocks
+    private HelloController helloController = new HelloController();
 
+    @Mock
+    private HelloService helloService;
+
+    private HelloModel helloModel = new HelloModel();
+
+    @DisplayName("Test Mock helloController + helloService")
     @Test
-    public void getTest() {
-        HelloModel model = helloController.find("42");
-
-        assertEquals("Jenna Stones", model.getName());
-        assertEquals("42", model.getAge());
+    void testGet() {
+        when(helloService.get("42")).thenReturn(helloModel);
+        assertEquals(helloModel, helloController.get("42"));
     }
+
 }
