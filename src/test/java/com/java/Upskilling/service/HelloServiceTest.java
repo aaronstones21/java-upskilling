@@ -1,10 +1,11 @@
 package com.java.Upskilling.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -26,14 +27,15 @@ public class HelloServiceTest {
     private HelloModel helloModel = new HelloModel();
 
     @BeforeEach
-    void setMockOutput() {
+    void setup() {
         when(helloRepository.get("42")).thenReturn(helloModel);
     }
 
-    @DisplayName("Test Mock helloService + helloRepository")
     @Test
-    void testGet() {
+    void HelloService_testGetHappyPath() {
         assertEquals(helloModel, helloService.get("42"));
+        verify(helloRepository, times(1)).get("42");
+
     }
 
 }

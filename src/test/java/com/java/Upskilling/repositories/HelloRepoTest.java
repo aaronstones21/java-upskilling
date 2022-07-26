@@ -11,7 +11,7 @@ public class HelloRepoTest {
     private final HelloRepository repo = new HelloRepository();
 
     @Test
-    public void opinion() {
+    public void HelloRepo_testGetHappyPath() {
         final HelloModel result = repo.get("42");
 
         HelloModel expected = new HelloModel();

@@ -1,6 +1,8 @@
 package com.java.Upskilling.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.DisplayName;
@@ -23,11 +25,11 @@ public class HelloControllerTest {
 
     private HelloModel helloModel = new HelloModel();
 
-    @DisplayName("Test Mock helloController + helloService")
     @Test
-    void testGet() {
+    void HelloController_testGetHappyPath() {
         when(helloService.get("42")).thenReturn(helloModel);
         assertEquals(helloModel, helloController.get("42"));
+        verify(helloService, times(1)).get("42");
     }
 
 }
