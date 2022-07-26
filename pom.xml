@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.java.upskilling</groupId>
 	<artifactId>upskilling</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<name>Java-Upskilling</name>
 	<description>Demo project for deploying a java app through terraform to AWS</description>
 	<properties>
