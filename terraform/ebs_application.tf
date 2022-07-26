@@ -1,5 +1,5 @@
 resource "aws_elastic_beanstalk_application" "ebs-app" {
-  name = format("%s/%s","aws-ebs-java-upskilling-project-", aws_s3_bucket.aws-s3-bucket-java-application.id)
+  name = format("%s/%s","aws-ebs-java-upskilling-project-", var.JUR_VERSION)
   description = "This is a live java upskilling project."
   appversion_lifecycle {
     service_role = var.AWS_IAM_USER
