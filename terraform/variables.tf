@@ -15,6 +15,6 @@ variable "AWS_IAM_USER" {
 
 variable "JUR_VERSION" {
   type = string 
-  default = "java-project-8-SNAPSHOT"
+  default = "java-project-010-SNAPSHOT"
   description = "Version of the project to keep the AWS EBS name unique"
 }
